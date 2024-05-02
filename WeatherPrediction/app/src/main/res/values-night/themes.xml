@@ -3,5 +3,8 @@
     <style name="Base.Theme.WeatherPrediction" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorPrimary">@color/darkGrey</item>
+        <item name="colorAccent">@color/white</item>
+        <item name="colorControlHighlight">@color/darkGrey</item>
     </style>
 </resources>
