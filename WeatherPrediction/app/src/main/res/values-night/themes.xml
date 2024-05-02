@@ -5,6 +5,7 @@
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
         <item name="colorPrimary">@color/darkGrey</item>
         <item name="colorAccent">@color/white</item>
-        <item name="colorControlHighlight">@color/darkGrey</item>
+        <item name="colorSecondary">@color/lightGrey</item>
+        <item name="colorControlHighlight">@color/lightGrey</item>
     </style>
 </resources>
