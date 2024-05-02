@@ -1,7 +1,24 @@
 package com.example.weather_prediction
 
 import androidx.appcompat.app.AppCompatActivity
+import android.content.Context
+import android.content.res.AssetFileDescriptor
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
+import com.example.weather_prediction.ml.WeatherPredictor
+import org.tensorflow.lite.Interpreter
+import java.io.FileInputStream
+import java.nio.ByteBuffer
+import java.nio.ByteOrder
+import java.nio.channels.FileChannel
 
 class MainActivity : AppCompatActivity() {
 
@@ -86,7 +103,7 @@ class MainActivity : AppCompatActivity() {
                     try {
                         val temperatureC = temp.toFloat()
                         val humidityPer = humidity.toFloat()
-                        val model = WeatherPrediction.newInstance(this)
+                        val model = WeatherPredictor.newInstance(this)
                         val byteBuffer =
                             ByteBuffer.allocateDirect(2 * 4) // Assuming 2 input features and 4 bytes per float
                         byteBuffer.order(ByteOrder.nativeOrder())
