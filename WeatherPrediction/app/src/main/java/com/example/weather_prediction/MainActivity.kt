@@ -104,7 +104,17 @@ class MainActivity : AppCompatActivity() {
                         val temperatureC = temp.toFloat()
                         val humidityPer = humidity.toFloat()
                         val model = WeatherPredictor.newInstance(this)
-                        resultTv.text = predictWeather(temperatureC, humidityPer)
+                        val weather = predictWeather(temperatureC, humidityPer)
+                        resultTv.text = "Predicted Weather: " + weather
+                        var weatherLogo = 0
+                        when(weather){
+                            "Sunny" -> weatherLogo = R.drawable.sunny
+                            "Cloudy" -> weatherLogo = R.drawable.cloudy
+                            "Partly Cloudy" -> weatherLogo = R.drawable.partly_cloudy
+                            "Rainy" -> weatherLogo = R.drawable.rainy
+                            "Cold" -> weatherLogo = R.drawable.cold
+                        }
+                        resultTv.setCompoundDrawablesWithIntrinsicBounds(0,weatherLogo,0,0)
                         // Releases model resources if no longer used.
                         model.close()
                     } catch (e: NumberFormatException) {
@@ -163,7 +173,7 @@ class MainActivity : AppCompatActivity() {
         val predictedWeather = weatherConditions[predictedClassIndex]
         Log.d("Weather", "Predicted: $predictedClassIndex")
 
-        return "Predicted Weather: $predictedWeather"
+        return predictedWeather
 
     }
 
