@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity() {
         try {
             tflite = Interpreter(loadModelFile())
             predictBtn.setOnClickListener {
-
+                resultTv.text=null
                 val temp = tempEt.text.toString().trim()
                 val humidity = humidEt.text.toString().trim()
 
