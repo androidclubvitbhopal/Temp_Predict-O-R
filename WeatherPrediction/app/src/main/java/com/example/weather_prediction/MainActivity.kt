@@ -104,34 +104,7 @@ class MainActivity : AppCompatActivity() {
                         val temperatureC = temp.toFloat()
                         val humidityPer = humidity.toFloat()
                         val model = WeatherPredictor.newInstance(this)
-                        val byteBuffer =
-                            ByteBuffer.allocateDirect(2 * 4) // Assuming 2 input features and 4 bytes per float
-                        byteBuffer.order(ByteOrder.nativeOrder())
-                        val floatBuffer = byteBuffer.asFloatBuffer()
-                        floatBuffer.put(floatArrayOf(temperatureC, humidityPer))
-                        byteBuffer.rewind()
-
-                        // Creates inputs for reference.
-                        val inputFeature0 =
-                            ByteBuffer.allocateDirect(1 * 2 * 4).apply {
-                                order(ByteOrder.nativeOrder())
-                            }.asFloatBuffer().apply {
-                                put(floatArrayOf(temperatureC, humidityPer))
-                            }
-
-                        // Runs model inference and gets result.
-                        val outputs = Array(1) { FloatArray(5) }
-                        tflite.run(inputFeature0, outputs)
-
-                        val maxIndex = outputs[0].indices.maxByOrNull { outputs[0][it] } ?: -1
-                        val predictedClassIndex = if (maxIndex != -1) maxIndex else 0
-
-                        val weatherConditions =
-                            arrayOf("Cloudy", "Cold", "Rainy", "Sunny", "Partly Cloudy")
-                        val predictedWeather = weatherConditions[predictedClassIndex]
-                        Log.d("Weather", "Predicted: $predictedClassIndex")
-
-                        resultTv.text = "Predicted Weather: $predictedWeather"
+                        resultTv.text = predictWeather(temperatureC, humidityPer)
                         // Releases model resources if no longer used.
                         model.close()
                     } catch (e: NumberFormatException) {
@@ -150,6 +123,39 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Failed to initialize model: ${ex.message}", Toast.LENGTH_SHORT)
                 .show()
         }
+    }
+
+    private fun predictWeather(temperatureC: Float, humidityPer: Float): String {
+        val byteBuffer =
+            ByteBuffer.allocateDirect(2 * 4) // Assuming 2 input features and 4 bytes per float
+        byteBuffer.order(ByteOrder.nativeOrder())
+        val floatBuffer = byteBuffer.asFloatBuffer()
+        floatBuffer.put(floatArrayOf(temperatureC, humidityPer))
+        byteBuffer.rewind()
+
+        // Creates inputs for reference.
+        val inputFeature0 =
+            ByteBuffer.allocateDirect(1 * 2 * 4).apply {
+                order(ByteOrder.nativeOrder())
+            }.asFloatBuffer().apply {
+                put(floatArrayOf(temperatureC, humidityPer))
+            }
+
+        // Runs model inference and gets result.
+        val outputs = Array(1) { FloatArray(5) }
+        tflite.run(inputFeature0, outputs)
+
+        val maxIndex = outputs[0].indices.maxByOrNull { outputs[0][it] } ?: -1
+        val predictedClassIndex = if (maxIndex != -1) maxIndex else 0
+
+        //val predictedClassIndex = outputs[0].indexOf(outputs[0].maxOrNull() ?: 0f)
+        val weatherConditions =
+            arrayOf("Cloudy", "Cold", "Rainy", "Sunny", "Partly Cloudy")
+        val predictedWeather = weatherConditions[predictedClassIndex]
+        Log.d("Weather", "Predicted: $predictedClassIndex")
+
+        return "Predicted Weather: $predictedWeather"
+
     }
 
     private fun loadModelFile(): ByteBuffer {
