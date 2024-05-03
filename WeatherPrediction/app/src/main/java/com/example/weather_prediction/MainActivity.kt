@@ -125,6 +125,15 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun loadModelFile(): ByteBuffer {
+        val fileDescriptor: AssetFileDescriptor = assets.openFd("Weather_predictor.tflite")
+        val inputStream = FileInputStream(fileDescriptor.fileDescriptor)
+        val fileChannel = inputStream.channel
+        val startOffset = fileDescriptor.startOffset
+        val declareLength = fileDescriptor.declaredLength
+        return fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declareLength)
+    }
+
     private fun predictWeather(temperatureC: Float, humidityPer: Float): String {
         val byteBuffer =
             ByteBuffer.allocateDirect(2 * 4) // Assuming 2 input features and 4 bytes per float
@@ -156,15 +165,6 @@ class MainActivity : AppCompatActivity() {
 
         return "Predicted Weather: $predictedWeather"
 
-    }
-
-    private fun loadModelFile(): ByteBuffer {
-        val fileDescriptor: AssetFileDescriptor = assets.openFd("Weather_predictor.tflite")
-        val inputStream = FileInputStream(fileDescriptor.fileDescriptor)
-        val fileChannel = inputStream.channel
-        val startOffset = fileDescriptor.startOffset
-        val declareLength = fileDescriptor.declaredLength
-        return fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declareLength)
     }
 
     override fun onDestroy() {
