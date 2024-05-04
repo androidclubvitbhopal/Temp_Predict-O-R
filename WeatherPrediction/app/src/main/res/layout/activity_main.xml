@@ -44,7 +44,7 @@
             android:hint="Enter Temperature"
             android:singleLine="true"
             android:imeOptions="actionNext"
-            android:inputType="numberDecimal"/>
+            />
     </LinearLayout>
 
     <LinearLayout
@@ -74,7 +74,7 @@
             android:hint="Enter Humidity"
             android:singleLine="true"
             android:imeOptions="actionDone"
-            android:inputType="numberDecimal"/>
+            />
     </LinearLayout>
 
     <Button
@@ -86,7 +86,7 @@
         android:layout_marginTop="30dp"
         android:background="@drawable/ripple"
         android:gravity="center_vertical"
-        android:text="Predict"
+        android:text="PREDICT"
         android:textAlignment="center"
         android:textColor="?attr/colorAccent"
         tools:ignore="RtlCompat" />
