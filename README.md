@@ -71,7 +71,7 @@ import org.tensorflow.lite.Interpreter
 
 
 # Weather-Predictor Model access
-You can get the model from "asset" section or follow the link -> [IoT Model](https://github.com/adsmehra/IOT-Weather-Predictor/blob/main/app/src/main/assets/Weather_predictor.tflite)
+You can get the model from "asset" section or follow the link -> [Tflite file](WeatherPrediction/app/src/main/assets/Weather_predictor.tflite)
 
 ## Flow diagram of the model
 
