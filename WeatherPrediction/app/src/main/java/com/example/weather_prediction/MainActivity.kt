@@ -105,7 +105,7 @@ class MainActivity : AppCompatActivity() {
                         val humidityPer = humidity.toFloat()
                         val model = WeatherPredictor.newInstance(this)
                         val weather = predictWeather(temperatureC, humidityPer)
-                        resultTv.text = "Predicted Weather: " + weather
+                        resultTv.text = "Predicted Weather:\n" + weather
 
                         var weatherLogo = 0
                         when (weather) {
@@ -160,14 +160,12 @@ class MainActivity : AppCompatActivity() {
 
         val maxIndex = outputs[0].indices.maxByOrNull { outputs[0][it] } ?: -1
         val predictedClassIndex = if (maxIndex != -1) maxIndex else 0
-
-        //val predictedClassIndex = outputs[0].indexOf(outputs[0].maxOrNull() ?: 0f)
         val weatherConditions =
             arrayOf("Cloudy", "Cold", "Rainy", "Sunny", "Partly Cloudy")
         val predictedWeather = weatherConditions[predictedClassIndex]
         Log.d("Weather", "Predicted: $predictedClassIndex")
 
-        return "Predicted Weather: $predictedWeather"
+        return "$predictedWeather"
 
     }
 
