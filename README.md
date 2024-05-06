@@ -32,7 +32,7 @@ It is going to be an Android application that is going to predict weather condit
 + All other minor dependencies are specified in the [build.gradle file](https://github.com/adsmehra/IOT-Weather-Predictor/blob/main/app/build.gradle.kts).
 
 ## Flow diagram of the model
-![Flow-Diagram]()
+![Flow-Diagram](/images/mlAndroidFlowDiagram.jpg)
 
 ## Dependencies 
 ### For TensorFlow
