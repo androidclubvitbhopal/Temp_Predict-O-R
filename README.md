@@ -26,11 +26,6 @@ It is going to be an Android application that is going to predict weather condit
 + Tap the "Predict" button to obtain the predicted weather condition.
 + View the predicted weather condition along with a corresponding weather icon.
 
-## Libraries Used
-
-+ TensorFlow Lite: For running machine learning models on Android.
-+ All other minor dependencies are specified in the [build.gradle file](https://github.com/adsmehra/IOT-Weather-Predictor/blob/main/app/build.gradle.kts).
-
 # ML Part
 ## DATASET
 The data used for this model is a custom-made dataset built using python pandas. 
@@ -84,8 +79,20 @@ Here we use the TensorFlow Lite Converter (tf.lite.TFLiteConverter) to convert o
 Finally, we save the converted TensorFlow Lite model (tflite_model) into a file named Weather_predictor.tflite. The model is written in binary ('wb') mode into this file using the write() method of the file handler (f). This .tflite file can now be deployed and used efficiently on mobile devices or embedded systems.
 Now you can look for the file in the file explorer and integrate it with the Android studio which would be discussed later.
 
+
+
+# Android Part
+
+## Libraries Used
+
++ TensorFlow Lite: For running machine learning models on Android.
++ All other minor dependencies are specified in the [build.gradle file](https://github.com/adsmehra/IOT-Weather-Predictor/blob/main/app/build.gradle.kts).
+
 ## Flow diagram of the model
 ![Flow-Diagram](/images/mlAndroidFlowDiagram.jpg)
+
+## UI XML File
+How your app looks is specified in the activity_main.xml [here](WeatherPrediction/app/src/main/res/layout/activity_main.xml)
 
 ## Dependencies 
 ### For TensorFlow
